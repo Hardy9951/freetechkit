@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Free browser-based tech tools: QR code generator, text utilities, and IPv4 subnet calculator. No account required.">
+  <meta name="theme-color" content="#101827">
+  <title>FreeTechKit — Free Online Tech Tools</title>
+  <link rel="canonical" href="https://YOUR-DOMAIN.example/">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="FreeTechKit home"><span class="brand-mark">F</span> FreeTechKit</a>
+    <nav aria-label="Main navigation">
+      <a href="#tools">Tools</a><a href="#guides">Guides</a><a href="#about">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow"><span class="status-dot"></span> FREE TOOLS · NO ACCOUNT NEEDED</div>
+      <h1>Small tools.<br><span>Big time savings.</span></h1>
+      <p class="hero-copy">Useful tech utilities that run right in your browser. Create QR codes, clean up text, and calculate IPv4 subnets in seconds.</p>
+      <a class="button primary" href="#tools">Explore the tools <span aria-hidden="true">↓</span></a>
+      <div class="hero-note"><span aria-hidden="true">🔒</span> Your inputs stay in your browser for these tools.</div>
+    </section>
+
+    <div class="ad-slot" aria-label="Advertisement placement">
+      <span class="ad-label">ADVERTISEMENT</span>
+      <p>Ad space — add an approved ad network code here after your site is accepted.</p>
+    </div>
+
+    <section id="tools" class="section">
+      <div class="section-heading">
+        <div><div class="eyebrow">THE TOOLBOX</div><h2>What do you need to do?</h2></div>
+        <p>Choose a tool and get straight to work.</p>
+      </div>
+      <div class="tool-tabs" role="tablist" aria-label="Tools">
+        <button class="tab active" role="tab" aria-selected="true" aria-controls="qr-panel" id="qr-tab" data-panel="qr-panel">▦ QR generator</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="text-panel" id="text-tab" data-panel="text-panel">Aa Text tools</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="network-panel" id="network-tab" data-panel="network-panel">⌘ Network calculator</button>
+      </div>
+
+      <section class="tool-panel active" id="qr-panel" role="tabpanel" aria-labelledby="qr-tab">
+        <div class="panel-intro"><span class="tool-icon violet">▦</span><div><h3>QR Code Generator</h3><p>Create a QR code for a URL or plain text. Scan it with a phone to test before sharing.</p></div></div>
+        <label for="qr-input">Website URL or text</label>
+        <textarea id="qr-input" rows="3" placeholder="https://example.com">https://example.com</textarea>
+        <div class="field-row">
+          <div><label for="qr-size">Image size</label><select id="qr-size"><option value="160">160 × 160</option><option value="220" selected>220 × 220</option><option value="300">300 × 300</option><option value="400">400 × 400</option></select></div>
+          <button class="button primary" id="qr-generate">Generate QR code</button>
+        </div>
+        <p class="hint" id="qr-status" aria-live="polite">The QR library loads when needed. An internet connection is required for that library.</p>
+        <div class="qr-result" id="qr-result"><div id="qrcode" aria-label="Generated QR code"></div><button class="button secondary" id="qr-download" disabled>Download PNG</button></div>
+      </section>
+
+      <section class="tool-panel" id="text-panel" role="tabpanel" aria-labelledby="text-tab" hidden>
+        <div class="panel-intro"><span class="tool-icon blue">Aa</span><div><h3>Text Toolkit</h3><p>Count words, change letter case, remove duplicate lines, or tidy extra spaces.</p></div></div>
+        <label for="text-input">Enter or paste your text</label>
+        <textarea id="text-input" rows="7" placeholder="Paste your text here…"></textarea>
+        <div class="stats"><div><strong id="char-count">0</strong><span>Characters</span></div><div><strong id="word-count">0</strong><span>Words</span></div><div><strong id="line-count">0</strong><span>Lines</span></div><div><strong id="read-time">0 min</strong><span>Read time</span></div></div>
+        <div class="button-row">
+          <button class="button secondary" data-text-action="upper">UPPERCASE</button>
+          <button class="button secondary" data-text-action="lower">lowercase</button>
+          <button class="button secondary" data-text-action="title">Title Case</button>
+          <button class="button secondary" data-text-action="trim">Clean spaces</button>
+          <button class="button secondary" data-text-action="unique">Remove duplicate lines</button>
+          <button class="button secondary" data-text-action="copy">Copy text</button>
+          <button class="button subtle" data-text-action="clear">Clear</button>
+        </div>
+        <p class="hint" id="text-status" aria-live="polite">Text is processed locally in your browser.</p>
+      </section>
+
+      <section class="tool-panel" id="network-panel" role="tabpanel" aria-labelledby="network-tab" hidden>
+        <div class="panel-intro"><span class="tool-icon green">⌘</span><div><h3>IPv4 Subnet Calculator</h3><p>Enter an IPv4 address and CIDR prefix to calculate network details.</p></div></div>
+        <div class="field-row network-fields">
+          <div class="grow"><label for="ip-input">IPv4 address</label><input id="ip-input" value="192.168.1.10" inputmode="decimal" autocomplete="off"></div>
+          <div class="prefix"><label for="cidr-input">CIDR prefix</label><select id="cidr-input"></select></div>
+          <button class="button primary" id="network-calculate">Calculate</button>
+        </div>
+        <p class="hint" id="network-status" aria-live="polite">Calculations run locally in your browser.</p>
+        <div class="result-grid" id="network-results">
+          <div><span>Network address</span><strong>—</strong></div><div><span>Broadcast address</span><strong>—</strong></div>
+          <div><span>Subnet mask</span><strong>—</strong></div><div><span>Wildcard mask</span><strong>—</strong></div>
+          <div><span>Total addresses</span><strong>—</strong></div><div><span>Usable host addresses</span><strong>—</strong></div>
+          <div><span>First usable host</span><strong>—</strong></div><div><span>Last usable host</span><strong>—</strong></div>
+        </div>
+        <p class="hint">Note: /31 and /32 networks have special host-address behavior; the results account for those cases.</p>
+      </section>
+    </section>
+
+    <section class="affiliate-section">
+      <div>
+        <div class="eyebrow">TOOLS WE FIND USEFUL</div>
+        <h2>Build your setup with the right tools.</h2>
+        <p>Recommend products you have genuinely evaluated. Replace these placeholders only with affiliate programs you have joined and links you are authorized to use.</p>
+      </div>
+      <div class="affiliate-card">
+        <span class="affiliate-icon">↗</span>
+        <div><strong>Recommended hosting</strong><p>Placeholder for a hosting provider you have tested.</p><a href="#" class="affiliate-link" data-placeholder-link>View hosting options →</a></div>
+      </div>
+      <div class="affiliate-card">
+        <span class="affiliate-icon">⌘</span>
+        <div><strong>Developer tools</strong><p>Placeholder for a relevant developer tool or service.</p><a href="#" class="affiliate-link" data-placeholder-link>Explore developer tools →</a></div>
+      </div>
+      <p class="disclosure">Affiliate disclosure: Some links on this page may earn us a commission if you make a purchase, at no extra cost to you. We only recommend relevant products. Replace this text to accurately describe your actual affiliate relationships.</p>
+    </section>
+
+    <section id="guides" class="section guides">
+      <div class="section-heading"><div><div class="eyebrow">LEARN SOMETHING USEFUL</div><h2>Quick guides</h2></div><p>Practical explanations to help you get more from the tools.</p></div>
+      <div class="guide-grid">
+        <article class="guide-card"><span>01 / NETWORKING</span><h3>What does a CIDR prefix mean?</h3><p>A quick introduction to subnet masks, network ranges, and host addresses.</p><a href="#network-panel" data-open-tool="network-panel">Try the subnet calculator →</a></article>
+        <article class="guide-card"><span>02 / PRODUCTIVITY</span><h3>When should you use a QR code?</h3><p>Use QR codes for menus, event pages, product information, and easy-to-scan links.</p><a href="#qr-panel" data-open-tool="qr-panel">Create a QR code →</a></article>
+        <article class="guide-card"><span>03 / TEXT</span><h3>Clean up text before publishing</h3><p>Remove duplicate lines, normalize spaces, and check word counts before you publish.</p><a href="#text-panel" data-open-tool="text-panel">Open text tools →</a></article>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <div><div class="eyebrow">ABOUT FREETECHKIT</div><h2>Useful by design.</h2></div>
+      <p>FreeTechKit is a lightweight collection of browser-based utilities. The text and network tools run locally in your browser. The QR generator uses a third-party JavaScript library loaded from a CDN. This starter site is a template; add your real contact details, privacy policy, terms, and verified product links before public launch.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand" href="#"><span class="brand-mark">F</span> FreeTechKit</a>
+    <p>Simple tools for everyday tech tasks.</p>
+    <div><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="mailto:hello@YOUR-DOMAIN.example">Contact</a></div>
+    <small>© <span id="year"></span> FreeTechKit. Check all content and links before publishing.</small>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+  <script src="script.js" defer></script>
+</body>
+</html>
