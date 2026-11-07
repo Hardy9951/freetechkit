@@ -6,6 +6,8 @@ A no-build static website containing:
 - IPv4 CIDR subnet calculator
 - JSON formatter and validator (pretty-print, minify, copy)
 - Password generator (Web Crypto, adjustable length and character sets)
+- Searchable directory with 100+ practical text, developer, network, encoding, math, conversion, date, and color tools
+- Browser-based image toolkit for resizing, compression, format conversion, cropping, rotation, thumbnails, and basic image information
 - Placeholder ad and affiliate sections
 - Starter privacy and terms pages
 
@@ -13,6 +15,7 @@ A no-build static website containing:
 - `index.html` — page structure and SEO metadata
 - `styles.css` — responsive styling
 - `script.js` — tool behavior
+- `tools-framework.js`, `extra-tools-*.js` — searchable browser-based tool catalog and utilities
 - `privacy.html`, `terms.html` — starter pages; review and replace before launch
 
 ## Before publishing

@@ -194,4 +194,64 @@
     e.preventDefault();
     alert("This is a placeholder. Add a real, approved affiliate URL before publishing.");
   }));
+  // Searchable directory for the additional browser-based tools.
+  const extraTools = window.FreeTechKitTools.tools;
+  const directory = $("#tool-directory"), searchInput = $("#tool-search"), categorySelect = $("#tool-category");
+  const toolCount = $("#tool-count"), runner = $("#extra-tool-runner"), toolForm = $("#extra-tool-form");
+  const output = $("#extra-tool-output"), copyOutput = $("#extra-tool-copy");
+  const categories = [...new Set(extraTools.map(tool => tool.category))].sort();
+  categories.forEach(category => { const option = document.createElement("option"); option.value = category; option.textContent = category; categorySelect.append(option); });
+  function renderDirectory() {
+    const query = searchInput.value.trim().toLocaleLowerCase(), category = categorySelect.value;
+    const matches = extraTools.filter(tool => (!category || tool.category === category) && `${tool.name} ${tool.category} ${tool.description}`.toLocaleLowerCase().includes(query));
+    directory.replaceChildren();
+    matches.forEach(tool => {
+      const card = document.createElement("article"); card.className = "directory-card";
+      const categoryLabel = document.createElement("span"); categoryLabel.className = "directory-category"; categoryLabel.textContent = tool.category;
+      const title = document.createElement("h3"); title.textContent = tool.name;
+      const description = document.createElement("p"); description.textContent = tool.description;
+      const button = document.createElement("button"); button.className = "directory-open"; button.type = "button"; button.textContent = "Open tool →";
+      button.addEventListener("click", () => openTool(tool));
+      card.append(categoryLabel, title, description, button); directory.append(card);
+    });
+    toolCount.textContent = `${matches.length} of ${extraTools.length} directory tools shown · ${extraTools.length + 15} total including 5 featured tools and 10 image tasks`;
+    if (!matches.length) { const empty = document.createElement("p"); empty.className = "directory-empty"; empty.textContent = "No tools match your search. Try a different word or category."; directory.append(empty); }
+  }
+  function openTool(tool) {
+    $("#extra-tool-title").textContent = tool.name; $("#extra-tool-description").textContent = tool.description;
+    $("#extra-tool-status").textContent = "Results are calculated in your browser.";
+    output.textContent = ""; output.hidden = true; copyOutput.disabled = true; toolForm.replaceChildren();
+    tool.fields.forEach((field, index) => {
+      const wrapper = document.createElement("div"); wrapper.className = "extra-tool-field";
+      const label = document.createElement("label"); label.htmlFor = `field-${tool.id}-${field.name}`; label.textContent = field.label;
+      let control;
+      if (field.type === "textarea") { control = document.createElement("textarea"); control.rows = 5; }
+      else if (field.type === "select") {
+        control = document.createElement("select");
+        (field.options || []).forEach(item => { const option = document.createElement("option"); option.value = item.value; option.textContent = item.label; control.append(option); });
+      } else { control = document.createElement("input"); control.type = field.type === "checkbox" ? "checkbox" : field.type; }
+      control.id = label.htmlFor; control.name = field.name;
+      if (field.type === "checkbox") control.checked = field.default === true || field.default === "true";
+      else if (field.default !== undefined) control.value = String(field.default);
+      if (field.min !== undefined) control.min = field.min;
+      if (field.max !== undefined) control.max = field.max;
+      if (index === 0 && field.type !== "checkbox") control.required = true;
+      wrapper.append(label, control); toolForm.append(wrapper);
+    });
+    const run = document.createElement("button"); run.className = "button primary"; run.type = "submit"; run.textContent = "Calculate"; toolForm.append(run);
+    toolForm.onsubmit = event => {
+      event.preventDefault();
+      const values = Object.fromEntries([...toolForm.elements].filter(element => element.name).map(element => [element.name, element.type === "checkbox" ? String(element.checked) : element.value]));
+      try { output.textContent = String(tool.run(values)); output.hidden = false; copyOutput.disabled = false; $("#extra-tool-status").textContent = "Done."; }
+      catch (error) { output.textContent = ""; output.hidden = true; copyOutput.disabled = true; $("#extra-tool-status").textContent = error instanceof Error ? error.message : "Check your input and try again."; }
+    };
+    runner.hidden = false; runner.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  searchInput.addEventListener("input", renderDirectory); categorySelect.addEventListener("change", renderDirectory);
+  $("#extra-tool-close").addEventListener("click", () => { runner.hidden = true; });
+  copyOutput.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(output.textContent); $("#extra-tool-status").textContent = "Copied result to clipboard."; }
+    catch { $("#extra-tool-status").textContent = "Clipboard access was blocked. Select the result and copy it manually."; }
+  });
+  renderDirectory();
 })();

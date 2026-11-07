@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Free browser-based tech tools: QR codes, text utilities, IPv4 subnet calculations, JSON formatting, and password generation. No account required.">
+  <meta name="description" content="A browser-based toolbox with 100+ text, developer, network, conversion, color, date, and calculator tools. No account required.">
   <meta name="theme-color" content="#101827">
   <title>FreeTechKit — Free Online Tech Tools</title>
   <link rel="canonical" href="https://YOUR-DOMAIN.example/">
@@ -21,7 +21,7 @@
     <section class="hero">
       <div class="eyebrow"><span class="status-dot"></span> FREE TOOLS · NO ACCOUNT NEEDED</div>
       <h1>Small tools.<br><span>Big time savings.</span></h1>
-      <p class="hero-copy">Useful tech utilities that run right in your browser. Create QR codes, clean up text, calculate IPv4 subnets, format JSON, and generate passwords in seconds.</p>
+      <p class="hero-copy">A toolbox of 100+ browser-based utilities for text, code, networking, conversions, colors, dates, and everyday calculations.</p>
       <a class="button primary" href="#tools">Explore the tools <span aria-hidden="true">↓</span></a>
       <div class="hero-note"><span aria-hidden="true">🔒</span> Your inputs stay in your browser for these tools.</div>
     </section>
@@ -122,6 +122,28 @@
       </section>
     </section>
 
+    <section id="all-tools" class="section all-tools-section">
+      <div class="section-heading">
+        <div><div class="eyebrow">THE FULL TOOLBOX</div><h2>Find a tool for the task.</h2></div>
+        <p>Search more than 100 practical tools or browse by category. Most process your inputs in this browser.</p>
+      </div>
+      <div class="tool-directory-controls">
+        <label class="visually-hidden" for="tool-search">Search tools</label>
+        <input id="tool-search" type="search" placeholder="Search tools…" autocomplete="off">
+        <label class="visually-hidden" for="tool-category">Filter by category</label>
+        <select id="tool-category"><option value="">All categories</option></select>
+      </div>
+      <p class="hint" id="tool-count" aria-live="polite"></p>
+      <div class="tool-directory" id="tool-directory"></div>
+      <section class="tool-panel extra-tool-runner" id="extra-tool-runner" hidden aria-live="polite">
+        <div class="panel-intro"><span class="tool-icon violet">✦</span><div><h3 id="extra-tool-title"></h3><p id="extra-tool-description"></p></div></div>
+        <form id="extra-tool-form"></form>
+        <pre class="extra-tool-output" id="extra-tool-output" hidden></pre>
+        <div class="button-row"><button class="button secondary" id="extra-tool-copy" type="button" disabled>Copy result</button><button class="button subtle" id="extra-tool-close" type="button">Close tool</button></div>
+        <p class="hint" id="extra-tool-status" aria-live="polite"></p>
+      </section>
+    </section>
+
     <section class="affiliate-section">
       <div>
         <div class="eyebrow">TOOLS WE FIND USEFUL</div>
@@ -162,6 +184,11 @@
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+  <script src="tools-framework.js" defer></script>
+  <script src="extra-tools-dev.js" defer></script>
+  <script src="extra-tools-everyday.js" defer></script>
+  <script src="extra-tools-calculators.js" defer></script>
+  <script src="extra-tools-files.js" defer></script>
   <script src="script.js" defer></script>
 </body>
 </html>
