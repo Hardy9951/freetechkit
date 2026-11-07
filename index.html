@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Free browser-based tech tools: QR codes, text utilities, IPv4 subnet calculations, and JSON formatting. No account required.">
+  <meta name="description" content="Free browser-based tech tools: QR codes, text utilities, IPv4 subnet calculations, JSON formatting, and password generation. No account required.">
   <meta name="theme-color" content="#101827">
   <title>FreeTechKit — Free Online Tech Tools</title>
   <link rel="canonical" href="https://YOUR-DOMAIN.example/">
@@ -21,7 +21,7 @@
     <section class="hero">
       <div class="eyebrow"><span class="status-dot"></span> FREE TOOLS · NO ACCOUNT NEEDED</div>
       <h1>Small tools.<br><span>Big time savings.</span></h1>
-      <p class="hero-copy">Useful tech utilities that run right in your browser. Create QR codes, clean up text, calculate IPv4 subnets, and format JSON in seconds.</p>
+      <p class="hero-copy">Useful tech utilities that run right in your browser. Create QR codes, clean up text, calculate IPv4 subnets, format JSON, and generate passwords in seconds.</p>
       <a class="button primary" href="#tools">Explore the tools <span aria-hidden="true">↓</span></a>
       <div class="hero-note"><span aria-hidden="true">🔒</span> Your inputs stay in your browser for these tools.</div>
     </section>
@@ -41,6 +41,7 @@
         <button class="tab" role="tab" aria-selected="false" aria-controls="text-panel" id="text-tab" data-panel="text-panel">Aa Text tools</button>
         <button class="tab" role="tab" aria-selected="false" aria-controls="network-panel" id="network-tab" data-panel="network-panel">⌘ Network calculator</button>
         <button class="tab" role="tab" aria-selected="false" aria-controls="json-panel" id="json-tab" data-panel="json-panel">{ } JSON formatter</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="password-panel" id="password-tab" data-panel="password-panel">⌁ Password generator</button>
       </div>
 
       <section class="tool-panel active" id="qr-panel" role="tabpanel" aria-labelledby="qr-tab">
@@ -68,6 +69,22 @@
           <button class="button subtle" data-json-action="clear">Clear</button>
         </div>
         <p class="hint" id="json-status" aria-live="polite">JSON is validated and processed locally in your browser.</p>
+      </section>
+
+      <section class="tool-panel" id="password-panel" role="tabpanel" aria-labelledby="password-tab" hidden>
+        <div class="panel-intro"><span class="tool-icon teal">⌁</span><div><h3>Password Generator</h3><p>Create a strong random password in your browser. Your password is never sent anywhere.</p></div></div>
+        <div class="field-row password-length"><div><label for="password-length">Password length: <span id="password-length-value">20</span></label><input id="password-length" type="range" min="8" max="128" value="20"></div></div>
+        <fieldset class="password-options"><legend>Include characters</legend>
+          <label><input type="checkbox" id="password-lower" checked> Lowercase letters (a–z)</label>
+          <label><input type="checkbox" id="password-upper" checked> Uppercase letters (A–Z)</label>
+          <label><input type="checkbox" id="password-numbers" checked> Numbers (0–9)</label>
+          <label><input type="checkbox" id="password-symbols" checked> Symbols (!@#$…)</label>
+          <label><input type="checkbox" id="password-avoid-ambiguous"> Avoid similar characters (O, 0, l, 1)</label>
+        </fieldset>
+        <label for="password-output">Your password</label>
+        <div class="password-output-row"><input id="password-output" type="text" readonly autocomplete="off" spellcheck="false" placeholder="Click Generate password"><button class="button secondary" id="password-copy" disabled>Copy</button></div>
+        <div class="button-row"><button class="button primary" id="password-generate">Generate password</button></div>
+        <p class="hint" id="password-status" aria-live="polite">Use a unique password for every account. Store it in a trusted password manager.</p>
       </section>
 
       <section class="tool-panel" id="text-panel" role="tabpanel" aria-labelledby="text-tab" hidden>
@@ -133,7 +150,7 @@
 
     <section id="about" class="about">
       <div><div class="eyebrow">ABOUT FREETECHKIT</div><h2>Useful by design.</h2></div>
-      <p>FreeTechKit is a lightweight collection of browser-based utilities. The text, network, and JSON tools run locally in your browser. The QR generator uses a third-party JavaScript library loaded from a CDN. This starter site is a template; add your real contact details, privacy policy, terms, and verified product links before public launch.</p>
+      <p>FreeTechKit is a lightweight collection of browser-based utilities. The text, network, JSON, and password tools run locally in your browser. The QR generator uses a third-party JavaScript library loaded from a CDN. This starter site is a template; add your real contact details, privacy policy, terms, and verified product links before public launch.</p>
     </section>
   </main>
 

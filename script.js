@@ -104,6 +104,46 @@
     }
   }));
 
+  // Password generator uses Web Crypto and unbiased random selection.
+  const passwordLength = $("#password-length"), passwordOutput = $("#password-output");
+  const passwordStatus = $("#password-status"), passwordCopy = $("#password-copy");
+  passwordLength.addEventListener("input", () => { $("#password-length-value").textContent = passwordLength.value; });
+  function secureIndex(limit) {
+    const range = 0x100000000;
+    const ceiling = Math.floor(range / limit) * limit;
+    const sample = new Uint32Array(1);
+    do { crypto.getRandomValues(sample); } while (sample[0] >= ceiling);
+    return sample[0] % limit;
+  }
+  $("#password-generate").addEventListener("click", () => {
+    const avoid = $("#password-avoid-ambiguous").checked;
+    const removeAmbiguous = value => avoid ? [...value].filter(char => !"O0Il1".includes(char)).join("") : value;
+    const groups = [
+      $("#password-lower").checked ? removeAmbiguous("abcdefghijklmnopqrstuvwxyz") : "",
+      $("#password-upper").checked ? removeAmbiguous("ABCDEFGHIJKLMNOPQRSTUVWXYZ") : "",
+      $("#password-numbers").checked ? removeAmbiguous("0123456789") : "",
+      $("#password-symbols").checked ? "!@#$%^&*()-_=+[]{};:,.?" : ""
+    ].filter(Boolean);
+    const length = Number(passwordLength.value);
+    if (!groups.length) { passwordOutput.value = ""; passwordCopy.disabled = true; passwordStatus.textContent = "Select at least one character type."; return; }
+    if (groups.length > length) { passwordStatus.textContent = "Choose a longer password or fewer character types."; return; }
+    if (!globalThis.crypto?.getRandomValues) { passwordStatus.textContent = "Secure random generation is unavailable in this browser."; return; }
+    const allCharacters = groups.join("");
+    const characters = groups.map(group => group[secureIndex(group.length)]);
+    while (characters.length < length) characters.push(allCharacters[secureIndex(allCharacters.length)]);
+    for (let i = characters.length - 1; i > 0; i--) {
+      const j = secureIndex(i + 1);
+      [characters[i], characters[j]] = [characters[j], characters[i]];
+    }
+    passwordOutput.value = characters.join("");
+    passwordCopy.disabled = false;
+    passwordStatus.textContent = `Generated a ${length}-character password locally. It includes at least one character from each selected type.`;
+  });
+  passwordCopy.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(passwordOutput.value); passwordStatus.textContent = "Copied password to clipboard."; }
+    catch { passwordOutput.select(); passwordStatus.textContent = "Clipboard access was blocked. Select the password and copy it manually."; }
+  });
+
   // IPv4 CIDR calculator
   const cidrSelect = $("#cidr-input");
   for (let i = 0; i <= 32; i++) {

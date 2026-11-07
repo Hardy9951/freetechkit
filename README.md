@@ -5,6 +5,7 @@ A no-build static website containing:
 - Text toolkit (word/character/line count, case conversion, trim, unique lines, copy)
 - IPv4 CIDR subnet calculator
 - JSON formatter and validator (pretty-print, minify, copy)
+- Password generator (Web Crypto, adjustable length and character sets)
 - Placeholder ad and affiliate sections
 - Starter privacy and terms pages
 
