@@ -73,6 +73,37 @@
   }));
   updateTextStats();
 
+  // JSON formatter and validator
+  const jsonInput = $("#json-input"), jsonOutput = $("#json-output"), jsonStatus = $("#json-status");
+  $$('[data-json-action]').forEach(button => button.addEventListener("click", async () => {
+    const action = button.dataset.jsonAction;
+    const source = jsonInput.value.trim();
+    if (action === "clear") {
+      jsonInput.value = "";
+      jsonOutput.value = "";
+      jsonStatus.textContent = "JSON fields cleared.";
+      jsonInput.focus();
+      return;
+    }
+    if (action === "copy") {
+      if (!jsonOutput.value) { jsonStatus.textContent = "Format or minify valid JSON before copying."; return; }
+      try { await navigator.clipboard.writeText(jsonOutput.value); jsonStatus.textContent = "Copied result to clipboard."; }
+      catch { jsonOutput.select(); jsonStatus.textContent = "Clipboard access was blocked. Select the result and copy it manually."; }
+      return;
+    }
+    if (!source) { jsonStatus.textContent = "Paste JSON into the input field first."; return; }
+    try {
+      const parsed = JSON.parse(source);
+      jsonOutput.value = JSON.stringify(parsed, null, action === "format" ? 2 : undefined);
+      jsonStatus.textContent = action === "format" ? "Valid JSON. Formatted with 2-space indentation." : "Valid JSON. Whitespace removed.";
+    } catch (error) {
+      jsonOutput.value = "";
+      const match = /position\s+(\d+)/i.exec(error.message);
+      const detail = match ? ` near character ${Number(match[1]) + 1}` : "";
+      jsonStatus.textContent = `Invalid JSON${detail}. ${error.message}`;
+    }
+  }));
+
   // IPv4 CIDR calculator
   const cidrSelect = $("#cidr-input");
   for (let i = 0; i <= 32; i++) {

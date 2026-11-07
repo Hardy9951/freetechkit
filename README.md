@@ -4,6 +4,7 @@ A no-build static website containing:
 - QR code generator (uses qrcode.js from cdnjs; requires internet access)
 - Text toolkit (word/character/line count, case conversion, trim, unique lines, copy)
 - IPv4 CIDR subnet calculator
+- JSON formatter and validator (pretty-print, minify, copy)
 - Placeholder ad and affiliate sections
 - Starter privacy and terms pages
 

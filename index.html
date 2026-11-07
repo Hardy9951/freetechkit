@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Free browser-based tech tools: QR code generator, text utilities, and IPv4 subnet calculator. No account required.">
+  <meta name="description" content="Free browser-based tech tools: QR codes, text utilities, IPv4 subnet calculations, and JSON formatting. No account required.">
   <meta name="theme-color" content="#101827">
   <title>FreeTechKit — Free Online Tech Tools</title>
   <link rel="canonical" href="https://YOUR-DOMAIN.example/">
@@ -21,7 +21,7 @@
     <section class="hero">
       <div class="eyebrow"><span class="status-dot"></span> FREE TOOLS · NO ACCOUNT NEEDED</div>
       <h1>Small tools.<br><span>Big time savings.</span></h1>
-      <p class="hero-copy">Useful tech utilities that run right in your browser. Create QR codes, clean up text, and calculate IPv4 subnets in seconds.</p>
+      <p class="hero-copy">Useful tech utilities that run right in your browser. Create QR codes, clean up text, calculate IPv4 subnets, and format JSON in seconds.</p>
       <a class="button primary" href="#tools">Explore the tools <span aria-hidden="true">↓</span></a>
       <div class="hero-note"><span aria-hidden="true">🔒</span> Your inputs stay in your browser for these tools.</div>
     </section>
@@ -40,6 +40,7 @@
         <button class="tab active" role="tab" aria-selected="true" aria-controls="qr-panel" id="qr-tab" data-panel="qr-panel">▦ QR generator</button>
         <button class="tab" role="tab" aria-selected="false" aria-controls="text-panel" id="text-tab" data-panel="text-panel">Aa Text tools</button>
         <button class="tab" role="tab" aria-selected="false" aria-controls="network-panel" id="network-tab" data-panel="network-panel">⌘ Network calculator</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="json-panel" id="json-tab" data-panel="json-panel">{ } JSON formatter</button>
       </div>
 
       <section class="tool-panel active" id="qr-panel" role="tabpanel" aria-labelledby="qr-tab">
@@ -52,6 +53,21 @@
         </div>
         <p class="hint" id="qr-status" aria-live="polite">The QR library loads when needed. An internet connection is required for that library.</p>
         <div class="qr-result" id="qr-result"><div id="qrcode" aria-label="Generated QR code"></div><button class="button secondary" id="qr-download" disabled>Download PNG</button></div>
+      </section>
+
+      <section class="tool-panel" id="json-panel" role="tabpanel" aria-labelledby="json-tab" hidden>
+        <div class="panel-intro"><span class="tool-icon amber">{ }</span><div><h3>JSON Formatter &amp; Validator</h3><p>Validate JSON, make it easier to read, or minify it for compact output.</p></div></div>
+        <div class="json-grid">
+          <div><label for="json-input">JSON input</label><textarea id="json-input" rows="12" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder='Paste JSON here, e.g. {"name":"FreeTechKit"}'></textarea></div>
+          <div><label for="json-output">Formatted result</label><textarea id="json-output" rows="12" spellcheck="false" readonly placeholder="Your formatted JSON will appear here"></textarea></div>
+        </div>
+        <div class="button-row">
+          <button class="button primary" data-json-action="format">Format JSON</button>
+          <button class="button secondary" data-json-action="minify">Minify JSON</button>
+          <button class="button secondary" data-json-action="copy">Copy result</button>
+          <button class="button subtle" data-json-action="clear">Clear</button>
+        </div>
+        <p class="hint" id="json-status" aria-live="polite">JSON is validated and processed locally in your browser.</p>
       </section>
 
       <section class="tool-panel" id="text-panel" role="tabpanel" aria-labelledby="text-tab" hidden>
@@ -117,7 +133,7 @@
 
     <section id="about" class="about">
       <div><div class="eyebrow">ABOUT FREETECHKIT</div><h2>Useful by design.</h2></div>
-      <p>FreeTechKit is a lightweight collection of browser-based utilities. The text and network tools run locally in your browser. The QR generator uses a third-party JavaScript library loaded from a CDN. This starter site is a template; add your real contact details, privacy policy, terms, and verified product links before public launch.</p>
+      <p>FreeTechKit is a lightweight collection of browser-based utilities. The text, network, and JSON tools run locally in your browser. The QR generator uses a third-party JavaScript library loaded from a CDN. This starter site is a template; add your real contact details, privacy policy, terms, and verified product links before public launch.</p>
     </section>
   </main>
 
