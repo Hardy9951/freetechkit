@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What does an IPv4 CIDR prefix mean? | FreeTechKit</title>
+  <meta name="description" content="Learn how to read an IPv4 CIDR prefix and calculate a subnet range using a worked /26 example.">
+  <link rel="canonical" href="https://hardy9951.github.io/freetechkit/ipv4-cidr-subnet.html">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="./"><span class="brand-mark">F</span> FreeTechKit</a>
+    <nav aria-label="Main navigation"><a href="./#tools">Tools</a><a href="./#guides">Guides</a></nav>
+  </header>
+  <main class="guide-page">
+    <article>
+      <h1>What does an IPv4 CIDR prefix mean?</h1>
+      <p class="hero-copy">Learn how to read an IPv4 CIDR prefix and calculate a subnet range using a worked /26 example.</p>
+      <a class="button primary" href="./#network-panel">Open the IPv4 subnet calculator</a>
+      <h2>Read the prefix</h2>
+      <p>An IPv4 address contains 32 bits. A /26 prefix fixes the first 26 bits as the network part and leaves 6 bits for addresses within the subnet. That gives 2 to the power of 6, or 64 total addresses.</p>
+      <h2>Work through an example</h2>
+      <p>Enter 192.0.2.70 and choose /26. The subnet mask is 255.255.255.192. The address falls in the 192.0.2.64–192.0.2.127 range. In a conventional subnet, .64 is the network address, .127 is the broadcast address, and .65 through .126 are the 62 usable host addresses.</p>
+      <h2>Check edge cases</h2>
+      <p>A /32 identifies one address. A /31 is commonly used for point-to-point links, where both addresses can be assigned to endpoints. Check the conventions of your equipment when planning an address range.</p>
+    </article>
+    <nav aria-label="Related guides">
+      <h2>Related guides</h2>
+      <ul>
+        <li><a href="qr-code-for-a-link.html">How to make a QR code for a link</a></li>
+        <li><a href="fix-invalid-json.html">How to find and fix invalid JSON</a></li>
+      </ul>
+    </nav>
+  </main>
+</body>
+</html>

@@ -4,15 +4,22 @@
   const $$ = (s, root = document) => [...root.querySelectorAll(s)];
 
   // Tool tabs
-  $$(".tab").forEach(tab => tab.addEventListener("click", () => {
-    $$(".tab").forEach(t => { const active = t === tab; t.classList.toggle("active", active); t.setAttribute("aria-selected", String(active)); });
-    $$(".tool-panel").forEach(panel => { const active = panel.id === tab.dataset.panel; panel.classList.toggle("active", active); panel.hidden = !active; });
+  const tabs = $$(".tab");
+  const tabPanels = $$('[role="tabpanel"]');
+  tabs.forEach(tab => tab.addEventListener("click", () => {
+    tabs.forEach(t => { const active = t === tab; t.classList.toggle("active", active); t.setAttribute("aria-selected", String(active)); });
+    tabPanels.forEach(panel => { const active = panel.id === tab.dataset.panel; panel.classList.toggle("active", active); panel.hidden = !active; });
   }));
-  $$("[data-open-tool]").forEach(link => link.addEventListener("click", () => {
-    const id = link.dataset.openTool;
-    const tab = $(`[data-panel="${id}"]`);
-    if (tab) tab.click();
-  }));
+  function openLinkedTool() {
+    const id = window.location.hash.slice(1);
+    const tab = tabs.find(item => item.dataset.panel === id);
+    if (!tab) return;
+
+    tab.click();
+    document.getElementById(id).scrollIntoView();
+  }
+  window.addEventListener("hashchange", openLinkedTool);
+  openLinkedTool();
   $("#year").textContent = new Date().getFullYear();
 
   // QR code generator. qrcode.js is loaded from a CDN, so it needs internet access.
@@ -189,11 +196,6 @@
   cidrSelect.addEventListener("change", calculateNetwork);
   calculateNetwork();
 
-  // Placeholder affiliate links must never look like live recommendations.
-  $$("[data-placeholder-link]").forEach(link => link.addEventListener("click", e => {
-    e.preventDefault();
-    alert("This is a placeholder. Add a real, approved affiliate URL before publishing.");
-  }));
   // Searchable directory for the additional browser-based tools.
   const extraTools = window.FreeTechKitTools.tools;
   const directory = $("#tool-directory"), searchInput = $("#tool-search"), categorySelect = $("#tool-category");

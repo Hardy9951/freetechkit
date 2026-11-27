@@ -1,4 +1,4 @@
-# FreeTechKit — static website starter
+# FreeTechKit
 
 A no-build static website containing:
 - QR code generator (uses qrcode.js from cdnjs; requires internet access)
@@ -8,24 +8,21 @@ A no-build static website containing:
 - Password generator (Web Crypto, adjustable length and character sets)
 - Searchable directory with 100+ practical text, developer, network, encoding, math, conversion, date, and color tools
 - Browser-based image toolkit for resizing, compression, format conversion, cropping, rotation, thumbnails, and basic image information
-- Placeholder ad and affiliate sections
-- Starter privacy and terms pages
+- Searchable how-to guides and a sponsorship inquiry link
+- Privacy and terms pages
 
 ## Files
 - `index.html` — page structure and SEO metadata
 - `styles.css` — responsive styling
 - `script.js` — tool behavior
 - `tools-framework.js`, `extra-tools-*.js` — searchable browser-based tool catalog and utilities
-- `privacy.html`, `terms.html` — starter pages; review and replace before launch
+- `privacy.html`, `terms.html` — site notices
 
-## Before publishing
-1. Replace `YOUR-DOMAIN.example` in `index.html` and `mailto:hello@YOUR-DOMAIN.example` with your real domain/contact.
-2. Replace the example canonical URL with the final HTTPS homepage URL.
-3. Test every tool on desktop and mobile.
-4. Replace affiliate placeholders only with real, approved links. Add a clear disclosure and comply with each affiliate program's rules.
-5. Add ad code only after approval by an ad network. Do not click your own ads.
-6. Update privacy and terms pages to describe your actual analytics, hosting logs, affiliate tracking, ads, cookies, and consent practices. These pages are starter text, not legal advice.
-7. Add a sitemap and robots.txt after choosing the final domain. Submit the sitemap in Google Search Console.
+## Search and sponsorship
+
+The site is published at https://hardy9951.github.io/freetechkit/. Submit its `sitemap.xml` in Google Search Console. Keep the canonical URLs and sitemap in sync if the public address changes.
+
+Sponsor inquiries currently go to GitHub Issues. Add an approved payment, advertising, or affiliate integration when account details are available, and update the privacy notice and any disclosures to match the integration.
 
 ## Free hosting options
 
